@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="contactListApp">
+<head>
+	<title>Contact List</title>
+
+	<link rel="stylesheet" type="text/css" href="libs/css/bootstrap.css">
+</head>
+<body>
+	<div class="container">
+		<h3>Contact List App</h3>	
+
+		<div class="row" ng-controller="contactListCtrl">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Phone</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input type="text" class="form-control" ng-model="contact.name"></td>
+						<td><input type="text" class="form-control" ng-model="contact.email"></td>
+						<td><input type="text" class="form-control" ng-model="contact.phone"></td>
+						<td>
+							<button type="button" class="btn btn-primary" ng-click="addContact()">Add Contact</button>
+							<button type="button" class="btn btn-success" ng-click="updateContact()">Update</button>
+						</td>
+					</tr>
+					<tr ng-repeat="contact in contactData">
+						<td>{{contact.name}}</td>
+						<td>{{contact.email}}</td>
+						<td>{{contact.phone}}</td>
+						<td>
+							<button type="button" class="btn btn-warning" ng-click="editContact(contact._id)">Edit</button>
+							<button type="button" class="btn btn-danger" ng-click="deleteContact(contact._id)">Delete</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+
+	
+
+	<script type="text/javascript" src="libs/js/angular.js"></script>
+	<script type="text/javascript" src="app/controllers/contactListCtrl.js"></script>
+	<!-- <script type="text/javascript" src="app/services/contactListService.js"></script> -->
+</body>
+</html>
