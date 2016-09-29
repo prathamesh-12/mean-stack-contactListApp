@@ -34,11 +34,28 @@ app.delete('/contactlist:id', function(request, response) {
 
 app.get('/contactlist:id', function(request, response) {
 	var id = request.params.id;
-	console.log(id);
 
 	db.contactlist.findOne({_id: mongojs.ObjectId(id)}, function(err, docs) {
 		response.json(docs);
 	});
+});
+
+app.put('/contactlist:id', function(request, response) {
+	var id = request.params.id;
+	console.log(request.body.name+"    "+request.body.email+"   "+request.body.phone);
+
+	db.contactlist.findAndModify({ 
+		query: {_id: mongojs.ObjectId(id)},
+		update : {
+			$set : {
+				name : request.body.name,
+				email : request.body.email,
+				phone : request.body.phone
+			}
+		},
+		new : true}, function(err, docs) {
+			response.json(docs);
+		});
 });
 
 app.listen(8000);

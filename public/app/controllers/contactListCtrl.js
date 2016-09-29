@@ -8,6 +8,7 @@ app.controller('contactListCtrl', ['$scope', '$http', function($scope, $http) {
 		$http.get('/contactlist')
 		.success(function(respData) {
 			$scope.contactData = respData && respData || [];
+			$scope.clearContact();
 		})
 		.error(function(errData) {
 			console.log("ERROR-----", errData);
@@ -47,9 +48,16 @@ app.controller('contactListCtrl', ['$scope', '$http', function($scope, $http) {
 			})
 	}
 
-	/*$scope.updateContact = function() {
-		$scope.put('/contactlist')
-	}*/
+	$scope.updateContact = function() {
+		console.log($scope.contact._id);
+		$http.put('/contactlist'+$scope.contact._id, $scope.contact)
+			.success(function(respData) {
+				appendDataIntoTable();
+			})
+			.error(function(errData) {
+				console.log("ERROR updateContact  ", errData);
+			})
+	}
 
 	$scope.clearContact = function() {
 		$scope.contact = "";
